@@ -10,22 +10,47 @@
 	var canvas;
 	var canvasContext;
 	var ballX = 50;
+	var ballSpeedX = 5;
 
 	window.onload = function() {
 		console.log("Hello World!");
 		canvas = document.getElementById('gameCanvas');
 		canvasContext = canvas.getContext('2d');
-		drawEverything();
+
+		var framesPerSecond = 30;
+		setInterval(function() {
+			moveEverything();
+			drawEverything();
+		}, 1000/framesPerSecond);
 
 	}
 
-	function drawEverything() {
-		ballX = ballX + 10;
+	function moveEverything(){
+		ballX = ballX + ballSpeedX;
 
-		canvasContext.fillStyle = 'black';
-		canvasContext.fillRect(0,0,canvas.width,canvas.height);
-		canvasContext.fillStyle = 'red';
-		canvasContext.fillRect(ballX,200,50,25);
+		if (ballX < 0) {
+			ballSpeedX = -ballSpeedX;
+		};
+
+		if (ballX > canvas.width) {
+			ballSpeedX = -ballSpeedX;
+		};
+	}
+
+	function drawEverything() {
+		// Next line blanks out the screen with black.
+		colorRect(0, 0, canvas.width, canvas.height, 'black');
+		// Left player paddle.
+		colorRect(0, 210, 10, 100, 'white');
+		// Next line draws the ball.
+		colorRect(ballX, 100, 10, 10, 'red');
+
+
+	}
+
+	function colorRect(leftX, topY, width, height, drawColor) {
+		canvasContext.fillStyle = drawColor;
+		canvasContext.fillRect(leftX, topY, width, height);
 	}
 
 
@@ -33,4 +58,3 @@
 
 </body>
 </html>
-
