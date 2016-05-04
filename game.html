@@ -13,7 +13,6 @@
 	var ballSpeedX = 5;
 
 	window.onload = function() {
-		console.log("Hello World!");
 		canvas = document.getElementById('gameCanvas');
 		canvasContext = canvas.getContext('2d');
 
@@ -43,9 +42,14 @@
 		// Left player paddle.
 		colorRect(0, 210, 10, 100, 'white');
 		// Next line draws the ball.
-		colorRect(ballX, 100, 10, 10, 'red');
+		colorCircle(ballX, 150, 10, 'white');
+	}
 
-
+	function colorCircle(centerX, centerY, radius, drawColor) {
+		canvasContext.fillStyle = drawColor;
+		canvasContext.beginPath();
+		canvasContext.arc(centerX, centerY, radius, 0, Math.PI*2, true);
+		canvasContext.fill();
 	}
 
 	function colorRect(leftX, topY, width, height, drawColor) {
@@ -58,4 +62,3 @@
 
 </body>
 </html>
-
